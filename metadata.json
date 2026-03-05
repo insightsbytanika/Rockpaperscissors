@@ -1,0 +1,5 @@
+{
+  "name": "Vision RPS",
+  "description": "A high-fidelity Rock Paper Scissors game powered by real-time hand gesture recognition.",
+  "requestFramePermissions": ["camera"]
+}
