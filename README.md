@@ -5,14 +5,15 @@
 </h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Vision-Computer_Vision-FF6F00?style=for-the-badge&logo=opencv&logoColor=white" />
-  <img src="https://img.shields.io/badge/Stack-Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
-  <img src="https://img.shields.io/badge/AI-Multimodal-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/MediaPipe-FF6F00?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/Gemini_API-4285F4?style=for-the-badge&logo=google&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
   <img src="https://img.shields.io/badge/Status-Live-00C853?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <strong>A real-time hand gesture game powered by multimodal AI vision.<br/>No controllers. No clicks. Just your hands.</strong>
+  <strong>A real-time hand gesture game using MediaPipe hand tracking + Gemini AI.<br/>No controllers. No clicks. Just your hands.</strong>
 </p>
 
 </div>
@@ -23,7 +24,7 @@
 
 > This isn't your grandma's Rock Paper Scissors.
 
-This app uses your **webcam + a multimodal vision model** to detect your hand gesture in real time and pit it against a computer opponent — no buttons, no keyboards, just raw hand-to-hand (pun intended) combat.
+This app uses your **webcam + MediaPipe hand tracking + Gemini AI** to detect your hand gesture in real time and pit it against a computer opponent — no buttons, no keyboards, just raw hand-to-hand (pun intended) combat.
 
 Flash ✊ for Rock. Hold up 🖐 for Paper. Show ✌ for Scissors. The AI sees it instantly.
 
@@ -33,11 +34,22 @@ Flash ✊ for Rock. Hold up 🖐 for Paper. Show ✌ for Scissors. The AI sees i
 
 | Feature | Description |
 |---|---|
-| 🤖 **AI Vision** | Detects your hand gesture live via webcam |
+| 🖐 **MediaPipe Hand Tracking** | Detects and tracks 21 hand landmarks in real time via webcam |
+| 🧠 **Gemini AI** | Interprets hand pose and drives intelligent game responses |
 | ⚡ **Real-time** | Sub-second response — no lag, no polling |
-| 🧠 **Smart Detection** | Handles lighting variance and hand orientations |
 | 🎮 **Zero-input UX** | No buttons needed — your hand *is* the controller |
-| 🌐 **Web-native** | Runs entirely in the browser via Node.js dev server |
+| 🎨 **Clean UI** | Built with React + Tailwind CSS for a smooth, responsive experience |
+
+---
+
+## ✦ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React + Tailwind CSS |
+| Hand Tracking | MediaPipe Hands |
+| AI / Vision | Gemini API |
+| Runtime | Node.js |
 
 ---
 
@@ -61,13 +73,13 @@ npm install
 
 ### 2 · Set Your API Key
 
-Open `.env.local` and drop in your key:
+Open `.env.local` and add your key:
 
 ```env
 GEMINI_API_KEY=your_key_here
 ```
 
-> 🔑 Don't have a key? Grab one free at [Google AI Studio](https://aistudio.google.com/apikey).
+> 🔑 Get a free API key at [Google AI Studio](https://aistudio.google.com/apikey).
 
 ### 3 · Launch
 
@@ -75,25 +87,28 @@ GEMINI_API_KEY=your_key_here
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost.3000) and let the battle begin. 🥊
+Open [http://localhost:3000](http://localhost:3000), allow webcam access, and let the battle begin. 🥊
 
 ---
 
 ## ✦ How It Works
 
 ```
- 📷 Webcam Frame
+ 📷 Webcam Feed
        ↓
- 🧠 Vision AI Model
+ 🖐 MediaPipe Hands
+    → Detects 21 hand landmarks in real time
        ↓
- 🔍 Gesture Classification  (Rock / Paper / Scissors / Unknown)
+ 🧠 Gemini API
+    → Classifies gesture (Rock / Paper / Scissors)
        ↓
- 🎮 Game Logic Engine
+ 🎮 React Game Logic
+    → Determines winner, updates score, renders result
        ↓
- 🏆 Winner Determined & Displayed
+ 🏆 Result displayed instantly
 ```
 
-Each captured frame is processed and classified by the vision model. The result feeds directly into the game loop — elegant, fast, and requires zero custom ML model training.
+MediaPipe handles the low-level computer vision — tracking your hand's exact joint positions frame by frame. Gemini sits on top as the reasoning layer, turning those landmarks into a game decision.
 
 ---
 
@@ -101,48 +116,37 @@ Each captured frame is processed and classified by the vision model. The result 
 
 ```
 📁 your-project/
-├── 📄 .env.local          ← your API key lives here
+├── 📄 .env.local             ← API key lives here (never commit this)
 ├── 📄 package.json
-├── 📁 app/
-│   ├── 📄 page.tsx        ← main game UI
-│   └── 📄 api/            ← vision model integration
-└── 📁 public/             ← static assets
+├── 📁 src/
+│   ├── 📄 App.jsx            ← root component
+│   ├── 📁 components/        ← game UI components
+│   └── 📁 hooks/             ← webcam & gesture logic
+└── 📁 public/
 ```
-
----
-
-## ✦ Built With
-
-<p>
-  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
-  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/WebRTC-333333?style=flat-square&logo=webrtc&logoColor=white" />
-  <img src="https://img.shields.io/badge/Gemini_API-4285F4?style=flat-square&logo=google&logoColor=white" />
-</p>
 
 ---
 
 ## ✦ Why I Built This
 
-I wanted to explore how far modern vision models could go beyond text — specifically, whether they could power a real-time interactive experience with zero latency. Turns out, they can. This project was my way of pushing that boundary while building something actually fun to play with.
+I wanted to go beyond traditional UI inputs and explore what a purely gesture-driven experience could feel like. Combining MediaPipe's precise hand landmark detection with Gemini's reasoning layer turned out to be a really natural fit — and building it in React made the state management for a real-time game surprisingly clean.
 
 ---
 
 ## ✦ Challenges & Learnings
 
-- **Latency** — Streaming frames to an API and getting back results fast enough to feel real-time required careful frame throttling
-- **Gesture ambiguity** — Edge cases like partially closed hands needed prompt engineering to handle gracefully
-- **UX without input** — Designing a UI that gives clear feedback when the only input is a hand gesture was a fun constraint to work within
+- **Frame throttling** — Sending every single webcam frame to an API would tank performance. Finding the right capture interval was key
+- **Landmark-to-gesture mapping** — MediaPipe gives you 21 raw joint coordinates. Translating those into Rock / Paper / Scissors reliably took iteration
+- **Real-time UX** — Designing clear feedback when there's no traditional input (clicks, taps) forced me to think differently about state and visual cues
 
 ---
 
 ## ✦ Contributing
 
-Found a bug? Got a wild idea (like multiplayer over WebSockets)? PRs are welcome.
+Got ideas? Found a bug? PRs are welcome.
 
 1. Fork → Branch → Commit → PR
-2. Please keep code clean and gestures clean 🤌
+2. Keep code clean and gestures cleaner 🤌
 
 ---
 
